@@ -1,0 +1,18 @@
+/* Write your CSS here */
+
+.product-card-container {
+  padding: 20px;
+  display: flex;
+}
+
+.product-image {
+  height: 30vh;
+  background-size: cover;
+  border-radius: 10px;
+  margin-right: 10px;
+}
+
+.product-details-container {
+  display: flex;
+  flex-direction: column;
+}
