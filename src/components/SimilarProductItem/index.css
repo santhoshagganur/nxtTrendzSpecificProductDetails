@@ -1,1 +1,19 @@
 /* Write your CSS here */
+
+.similar-product {
+  display: flex;
+  flex-direction: column;
+  margin-right: 20px;
+  width: 200px;
+}
+
+.similar-product-image {
+  height: 100px;
+  background-size: cover;
+  border-radius: 5px;
+}
+
+.price-rating-container {
+  display: flex;
+  justify-content: space-between;
+}

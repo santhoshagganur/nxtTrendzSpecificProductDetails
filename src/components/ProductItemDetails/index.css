@@ -98,3 +98,26 @@
   border-width: 0;
   width: 200px;
 }
+
+.failure-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.failure {
+  height: 40vh;
+  background-size: cover;
+}
+
+.continue-btn {
+  background-color: #3b82f6;
+  color: #ffffff;
+  font-size: 15px;
+  border-radius: 5ps;
+  border-width: 0;
+}
+
+.similar-products-container {
+  display: flex;
+  list-style-type: none;
+}
