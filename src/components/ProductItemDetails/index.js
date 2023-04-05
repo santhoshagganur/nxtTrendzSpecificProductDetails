@@ -1,5 +1,6 @@
 // Write your code here
 import {Component} from 'react'
+import {Link} from 'react-router-dom'
 import {Loader} from 'react-loader-spinner'
 import {BsDashSquare, BsPlusSquare} from 'react-icons/bs'
 
@@ -25,7 +26,6 @@ class ProductItemDetails extends Component {
 
   componentDidMount() {
     this.getDetails()
-    this.setState({apiStatus: apiStatusConstants.inProgress})
   }
 
   getFormattedData = data => ({
@@ -53,7 +53,6 @@ class ProductItemDetails extends Component {
     }
 
     const response = await fetch(`https://apis.ccbp.in/products/${id}`, options)
-    console.log(response)
 
     if (response.ok) {
       const fetchedData = await response.json()
@@ -77,9 +76,12 @@ class ProductItemDetails extends Component {
   }
 
   onDecrement = () => {
-    this.setState(prevState => ({
-      quantity: prevState.quantity - 1,
-    }))
+    const {quantity} = this.state
+    if (quantity > 1) {
+      this.setState(prevState => ({
+        quantity: prevState.quantity - 1,
+      }))
+    }
   }
 
   onIncrement = () => {
@@ -89,7 +91,6 @@ class ProductItemDetails extends Component {
   }
 
   renderSuccessView = () => {
-    console.log('yes')
     const {productData, similarProducts, quantity} = this.state
     const {
       imageUrl,
@@ -133,6 +134,7 @@ class ProductItemDetails extends Component {
                 className="quantity-buttons"
                 type="button"
                 onClick={this.onDecrement}
+                testid="minus"
               >
                 <BsDashSquare className="user-interaction-button" />
               </button>
@@ -141,6 +143,7 @@ class ProductItemDetails extends Component {
                 className="quantity-buttons"
                 type="button"
                 onClick={this.onIncrement}
+                testid="plus"
               >
                 <BsPlusSquare className="user-interaction-button" />
               </button>
@@ -159,6 +162,28 @@ class ProductItemDetails extends Component {
       </>
     )
   }
+
+  renderFailureView = () => (
+    <div className="failure-container">
+      <img
+        src="https://assets.ccbp.in/frontend/react-js/nxt-trendz-error-view-img.png"
+        alt="failure view"
+        className="failure"
+      />
+      <h1> Product Not Found </h1>
+      <Link to="/products">
+        <button type="button" className="continue-btn">
+          Continue Shopping
+        </button>
+      </Link>
+    </div>
+  )
+
+  renderLoader = () => (
+    <div testid="loader">
+      <Loader type="ThreeDots" color="#0b69ff" height="50" width="50" />
+    </div>
+  )
 
   renderProductsDetails = () => {
     const {apiStatus} = this.state
